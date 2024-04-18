@@ -5,17 +5,29 @@ const connection = new Connection(clusterApiUrl("devnet"))
 console.log("Connected to DevNet!")
 
 
-try{
-    const  address = new PublicKey(PUBLIC_KEY)
-    const isValid = await PublicKey.isOnCurve(address.toBytes())
-    if(isValid){
-        console.log("Public Key is valid!")
-    }
+if(isValidPublicKey()){
+    console.log("Public Key is valid!")
+    
+    const address = new PublicKey(PUBLIC_KEY)
     const balance = await connection.getBalance(address)
     const balanceInSol = balance/LAMPORTS_PER_SOL;
     const accountInfo = await connection.getAccountInfo(address)
     console.log(`Balance : ${balance} lamports or ${balanceInSol} SOL`);
     console.log(`Account Info : ${accountInfo}`)
-}catch(e){
-    console.error("Not a valid public key.")
+
+}else{
+    console.log("Invalid Public Key.")
+}
+
+    
+
+//check if the public key is valid and on the ed25519 curve.
+function isValidPublicKey(){
+    try{
+        var address = new PublicKey(PUBLIC_KEY)
+    }
+    catch(e){
+        return false
+    }
+    return PublicKey.isOnCurve(address.toBytes())
 }
