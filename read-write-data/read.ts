@@ -24,10 +24,10 @@ if(isValidPublicKey()){
 //check if the public key is valid and on the ed25519 curve.
 function isValidPublicKey(){
     try{
-        var address = new PublicKey(PUBLIC_KEY)
+        const address = new PublicKey(PUBLIC_KEY)
+        return PublicKey.isOnCurve(address.toBytes())
     }
     catch(e){
         return false
     }
-    return PublicKey.isOnCurve(address.toBytes())
 }
