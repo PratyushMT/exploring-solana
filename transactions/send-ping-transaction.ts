@@ -8,7 +8,7 @@ dotenv.config()
 const PING_PROGRAM_ADDRESS = new PublicKey('ChT1B39WKLS8qUrkLvFDXMhEJ4F1XZzwUNHUt4AU9aVa')
 const PING_PROGRAM_DATA_ADDRESS =  new PublicKey('Ah9K7dQ8EHaZqcAsgBW8w37yN2eAy3koFmUn4x3CJtod')
 
-const sender = getKeypairFromEnvironment("SECRET_KEY")
+const payer = getKeypairFromEnvironment("SECRET_KEY")
 const connection = new Connection(clusterApiUrl('devnet'))
 
 // await airdropIfRequired(
@@ -36,7 +36,9 @@ const instruction = new TransactionInstruction({
 
 transaction.add(instruction)
 
-const signature = await sendAndConfirmTransaction(connection, transaction, [sender])
+const signature = await sendAndConfirmTransaction(connection, transaction, [payer])
 
 console.log(`Transaction successful.\nSignature: ${signature}`)
 console.log(`Here's the link to your transaction on the Solana Explorer:\nhttps://explorer.solana.com/tx/${signature}?cluster=devnet`)
+
+//You can use the signature and check how many times the program has been pinged under the "Program Logs" section on the Solana Explorer.
