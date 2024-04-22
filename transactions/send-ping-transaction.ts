@@ -41,4 +41,4 @@ const signature = await sendAndConfirmTransaction(connection, transaction, [paye
 console.log(`Transaction successful.\nSignature: ${signature}`)
 console.log(`Here's the link to your transaction on the Solana Explorer:\nhttps://explorer.solana.com/tx/${signature}?cluster=devnet`)
 
-//You can use the signature and check how many times the program has been pinged under the "Program Logs" section on the Solana Explorer.
+//You can use the signature and check how many times the program has been pinged under the "Program Instruction Logs" section on the Solana Explorer.
